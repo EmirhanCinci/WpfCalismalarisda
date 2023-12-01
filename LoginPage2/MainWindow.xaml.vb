@@ -1,4 +1,8 @@
-﻿Class MainWindow
+﻿Imports System.Net.Http
+Imports System.Text
+Imports System.Text.Json
+
+Class MainWindow
     Private Sub textEmail_MouseDown(sender As Object, e As MouseButtonEventArgs)
         txtEmail.Focus()
     End Sub
@@ -23,9 +27,29 @@
         End If
     End Sub
 
-    Private Sub Button_Click(sender As Object, e As RoutedEventArgs)
+    Private Async Sub Button_Click(sender As Object, e As RoutedEventArgs)
         If Not String.IsNullOrEmpty(txtEmail.Text) AndAlso String.IsNullOrEmpty(txtPassword.Password) Then
             MessageBox.Show("Giriş bilgileriniz eksiksiz bir şekilde girilmelidir.", "Uyarı Mesajı")
+        Else
+            Dim apiUrl As String = "https://localhost:7257/api/Users/Login"
+            Dim email As String = textEmail.Text
+            Dim password As String = textPassword.Text
+
+            Using httpClient As New HttpClient()
+                Dim loginData As New With {
+                    .email = email,
+                    .password = password
+                }
+                Dim jsonContent As String = JsonSerializer.Serialize(loginData)
+                Dim content As New StringContent(jsonContent, Encoding.UTF8, "application/json")
+                Dim response As HttpResponseMessage = Await httpClient.PostAsync(apiUrl, content)
+                If response.IsSuccessStatusCode Then
+                    Dim responseBody As String = Await response.Content.ReadAsStringAsync()
+                    MessageBox.Show("Başarılı bir şekilde giriş yapıldı.", "Bilgi Mesajı")
+                Else
+                    MessageBox.Show("Başarısız Deneme.", "Uyarı Mesajı")
+                End If
+            End Using
         End If
     End Sub
 
