@@ -14,7 +14,7 @@
         </Grid.ColumnDefinitions>
 
         <Border Grid.Column="0">
-            <StackPanel Orientation="Vertical" Background="#40E0D0">
+            <StackPanel Orientation="Vertical" Background="#0c1e35">
                 <Image Source="/Images/logo.png" Height="50" HorizontalAlignment="Center" />
                 <TextBlock Text="Aktif Kullanıcı" Foreground="#ffffff" FontSize="14" TextAlignment="Center" Margin="0 15 0 0" FontWeight="Bold"/>
                 <TextBlock Text="Emirhan CİNCİ" Foreground="#ffffff" FontSize="18" TextAlignment="Center" Margin="0 5 0 0" FontWeight="Bold" FontStyle="Italic" TextDecorations="Underline"/>
@@ -53,7 +53,7 @@
                 </Grid.RowDefinitions>
 
                 <Border Grid.Row="0">
-                    <StackPanel Orientation="Horizontal" Background="#40E0D0">
+                    <StackPanel Orientation="Horizontal" Background="#0c1e35">
                         
                     </StackPanel>
                 </Border>
